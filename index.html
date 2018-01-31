@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="//use.fontawesome.com/releases/v5.0.6/js/solid.js"></script>
+  <script src="//use.fontawesome.com/releases/v5.0.6/js/fontawesome.js"></script>
+</head>
+<body>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p>&nbsp;</p>
+        <div class="form-group">
+          <label>Row</label>
+          <input type="number" class="form-control" v-model="input.row" v-on:change="createTable" autofocus>
+        </div>
+        <div class="form-group">
+          <label>Column</label>
+          <input type="number" class="form-control" v-model="input.column" v-on:change="createTable">
+        </div>
+      </div>
+      <div class="col-md-12 editor">
+        <div class="color-picker" v-on:click="triggerColorPicker">
+          <i class="fas fa-eye-dropper fa-lg"></i>
+          <input type="color" class="current-color" v-on:change="changeColor">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="led-row" v-for="row in rows" :key="row.id">
+          <div
+            class="led-column"
+            v-for="led in row.leds"
+            v-bind:class="{ active: led.active }"
+            v-on:click="selectColumn"
+            :key="led.id"
+            :data-row="row.id"
+            :data-column="led.id"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="node_modules/vue/dist/vue.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
