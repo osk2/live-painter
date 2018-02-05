@@ -2,66 +2,46 @@ const app = new Vue({
   el: '#app',
   data: {
     input: {
-      row: 0,
-      column: 0
+      row: 1,
+      column: 1,
+      showID: false,
+      color: '#ffffff'
     },
-    status: {
-      isSelected: false,
-      selected: {
-        $target: null,
-        row: 0,
-        column: 0
-      }
-    },
-    rows: []
+    leds: []
   },
   methods: {
-    createTable() {
-      // Push led into row
-      this.rows = [];
-      for (let i = 1; i <= this.input.row; i++) {
-        const row = {
-          id: i,
-          leds: []
-        };
+    createLeds() {
+      const ledCount = this.input.row * this.input.column;
 
-        for (let j = 1; j <= this.input.column; j++) {
-          const led = {
-            id: j,
-            active: false,
-            color: ''
-          }
-          row.leds.push(led);
-        }
-        this.rows.push(row);
+      this.leds = [];
+      for (let i = 1; i <= ledCount; i++) {
+        this.leds.push({
+          id: i,
+          color: '#ffffff',
+          active: false
+        });
       }
     },
-    triggerColorPicker() {
-      $('.current-color').trigger('click');
+    triggerColorPicker(e) {
+      e.stopPropagation();
+      $('.color-picker').trigger('click');
     },
-    changeColor(e) {
-      const $target = $(e.target);
-      const color = $target.val();
-
-      this.rows[row - 1].leds[column - 1].color = color;
-      this.status.selected.$target.css('background-color', color);
-    },
-    selectColumn(e) {
-      const $target = $(e.target);
-      const row = $target.data('row');
-      const column = $target.data('column');
-
-      _.each(this.rows, (row) => {
-        _.map(row.leds, (led) => {
-          led.active = false;
-          return led;
-        });
+    toggleLed(e) {
+      const id = parseInt($(e.target).attr('id'));
+      const index = _.findIndex(this.leds, (led) => {
+        return led.id === id;
       });
-      this.rows[row - 1].leds[column - 1].active = true;
-      this.status.isSelected = !this.status.isSelected;
-      this.status.selected.$target = $target;
-      this.status.selected.row = row;
-      this.status.selected.column = column;
+      this.leds[index].active = !this.leds[index].active;
+    },
+    applyColor(e) {
+      const color = $(e.target).val();
+
+      this.leds = _.map(this.leds, (led) => {
+        if (led.active) {
+          led.color = color;
+        }
+        return led;
+      });
     }
   }
 });

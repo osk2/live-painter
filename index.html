@@ -11,36 +11,47 @@
 <body>
   <div id="app" class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <p>&nbsp;</p>
         <div class="form-group">
           <label>Row</label>
-          <input type="number" class="form-control" v-model="input.row" v-on:change="createTable" autofocus>
+          <input type="number" class="form-control" v-model="input.row" v-on:change="createLeds" autofocus>
         </div>
         <div class="form-group">
           <label>Column</label>
-          <input type="number" class="form-control" v-model="input.column" v-on:change="createTable">
+          <input type="number" class="form-control" v-model="input.column" v-on:change="createLeds">
         </div>
       </div>
-      <div class="col-md-12 editor">
-        <div class="color-picker" v-on:click="triggerColorPicker">
-          <i class="fas fa-eye-dropper fa-lg"></i>
-          <input type="color" class="current-color" v-on:change="changeColor">
+      <div class="col-md-6 editor">
+        <p>&nbsp;</p>
+        <div class="color-picker-wrapper" v-on:click="triggerColorPicker">
+          <!-- <i class="fas fa-eye-dropper fa-lg"></i> -->
+          Select Color
+          <input type="color" class="color-picker" v-model="input.color" v-on:change="applyColor">
+        </div>
+        <div>
+          <a href="#" v-on:click="input.showID = !input.showID">Toggle ID</a>
+          <!-- <i
+            class="fas fa-lg"
+            v-on:click="input.showID = !input.showID"
+            v-bind:class="{ 'fa-eye': input.showID, 'fa-slash': !input.showID }"
+          ></i> -->
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div class="led-row" v-for="row in rows" :key="row.id">
+        <div class="led-row" v-for="i in Math.ceil(leds.length / input.column)">
           <div
             class="led-column"
-            v-for="led in row.leds"
+            v-for="led in leds.slice((i - 1) * input.column, i * input.column)"
             v-bind:class="{ active: led.active }"
-            v-on:click="selectColumn"
+            v-bind:style="{ 'background-color': led.color }"
+            v-bind:id="led.id"
+            v-on:click="toggleLed"
             :key="led.id"
-            :data-row="row.id"
-            :data-column="led.id"
           >
+            <span class="led-id" v-if="input.showID">{{led.id}}</span>
           </div>
         </div>
       </div>

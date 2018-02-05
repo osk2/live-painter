@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 input[type="color"]::-webkit-color-swatch {
   border: none;
 }
@@ -8,6 +12,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 
 .led-row {
   width: 100%;
+  line-height: 1;
 }
 
 .led-column {
@@ -19,12 +24,11 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   display: inline-block;
 }
 
-.led-column.active,
-.led-column:hover {
+.led-column.active {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
-.color-picker {
+.color-picker-wrapper {
   display: inline-block;
   cursor: pointer;
 }
@@ -37,7 +41,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   color: #666;
 }
 
-.color-picker .current-color {
+.color-picker {
   width: 1.5em;
   height: 1.5em;
   vertical-align: bottom;
