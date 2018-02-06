@@ -1,0 +1,92 @@
+html, body {
+  height: 100%;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.alert-secondary {
+  word-break: break-all;
+}
+
+.led-row {
+  width: 100%;
+  line-height: 1;
+}
+
+.led-column {
+  min-width: 2em;
+  min-height: 2em;
+  margin: 3px;
+  border: solid 2px #bbb;
+  border-radius: 2px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.led-column.active {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  -webkit-animation-name: spaceboots;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin:50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-name: spaceboots;
+  animation-duration: 0.8s;
+  transform-origin:50% 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.color-picker-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.editor {
+  margin: 1em 0;
+}
+
+.color-picker svg {
+  color: #666;
+}
+
+.color-picker {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: bottom;
+  border: none;
+}
+
+@-webkit-keyframes spaceboots {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(0px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(2px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(2px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes spaceboots {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(0px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(2px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(2px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}

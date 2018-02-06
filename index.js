@@ -4,10 +4,16 @@ const app = new Vue({
     input: {
       row: 1,
       column: 1,
-      showID: false,
-      color: '#ffffff'
+      color: '#ffffff',
+      idMode: false,
+      selectMode: 'All'
     },
-    leds: []
+    leds: [{
+      id: 1,
+      color: '#ffffff',
+      active: false
+    }],
+    exportedCode: ''
   },
   methods: {
     createLeds() {
@@ -21,6 +27,8 @@ const app = new Vue({
           active: false
         });
       }
+      this.input.selectMode = 'All';
+      this.exportCode();
     },
     triggerColorPicker(e) {
       e.stopPropagation();
@@ -42,6 +50,35 @@ const app = new Vue({
         }
         return led;
       });
+      this.exportCode();
+    },
+    selectMode() {
+      if (this.input.selectMode === 'All') {
+        this.leds = _.map(this.leds, (led) => {
+          led.active = true;
+          return led;
+        });
+        return this.input.selectMode = 'None';
+      }
+      if (this.input.selectMode === 'None') {
+        this.leds = _.map(this.leds, (led) => {
+          led.active = false;
+          return led;
+        });
+        return this.input.selectMode = 'All';
+      }
+    },
+    exportCode() {
+      const codeArray = _.map(this.leds, (led) => {
+        let id = led.id.toString();
+
+        if (id.length < 2) {
+          id = '0' + id;
+        }
+        return id + led.color.replace('#', '');
+      });
+
+      this.exportedCode = codeArray.join('');
     }
   }
 });

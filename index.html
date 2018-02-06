@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="//use.fontawesome.com/releases/v5.0.6/js/solid.js"></script>
   <script src="//use.fontawesome.com/releases/v5.0.6/js/fontawesome.js"></script>
 </head>
@@ -24,18 +24,20 @@
       </div>
       <div class="col-md-6 editor">
         <p>&nbsp;</p>
-        <div class="color-picker-wrapper" v-on:click="triggerColorPicker">
-          <!-- <i class="fas fa-eye-dropper fa-lg"></i> -->
-          Select Color
-          <input type="color" class="color-picker" v-model="input.color" v-on:change="applyColor">
+        <div>
+          <a href="#" class="color-picker-wrapper" v-on:click="triggerColorPicker">
+            Select Color
+            <input type="color" class="color-picker" v-model="input.color" v-on:change="applyColor">
+          </a>
         </div>
         <div>
-          <a href="#" v-on:click="input.showID = !input.showID">Toggle ID</a>
-          <!-- <i
-            class="fas fa-lg"
-            v-on:click="input.showID = !input.showID"
-            v-bind:class="{ 'fa-eye': input.showID, 'fa-slash': !input.showID }"
-          ></i> -->
+          <a href="#" v-on:click="input.idMode = !input.idMode">{{ input.idMode ? 'Hide' : 'Show' }} ID</a>
+        </div>
+        <div>
+          <a href="#" v-on:click="selectMode">Select {{ input.selectMode }}</a>
+        </div>
+        <div>
+          <div class="alert alert-secondary" role="alert" v-if="this.exportedCode">{{ exportedCode }}</div>
         </div>
       </div>
     </div>
@@ -51,7 +53,7 @@
             v-on:click="toggleLed"
             :key="led.id"
           >
-            <span class="led-id" v-if="input.showID">{{led.id}}</span>
+            <span class="led-id" v-if="input.idMode">{{ led.id }}</span>
           </div>
         </div>
       </div>
