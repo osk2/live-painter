@@ -6,14 +6,18 @@ const app = new Vue({
       column: 1,
       color: '#ffffff',
       idMode: false,
-      selectMode: 'All'
+      selectMode: '全選'
     },
     leds: [{
       id: 1,
       color: '#ffffff',
       active: false
     }],
-    exportedCode: ''
+    exportedCode: '',
+    constant: {
+      all: '全選',
+      none: '全不選'
+    },
   },
   methods: {
     createLeds() {
@@ -27,7 +31,7 @@ const app = new Vue({
           active: false
         });
       }
-      this.input.selectMode = 'All';
+      this.input.selectMode = this.constant.all;
       this.exportCode();
     },
     triggerColorPicker(e) {
@@ -53,19 +57,19 @@ const app = new Vue({
       this.exportCode();
     },
     selectMode() {
-      if (this.input.selectMode === 'All') {
+      if (this.input.selectMode === this.constant.all) {
         this.leds = _.map(this.leds, (led) => {
           led.active = true;
           return led;
         });
-        return this.input.selectMode = 'None';
+        return this.input.selectMode = this.constant.none;
       }
-      if (this.input.selectMode === 'None') {
+      if (this.input.selectMode === this.constant.none) {
         this.leds = _.map(this.leds, (led) => {
           led.active = false;
           return led;
         });
-        return this.input.selectMode = 'All';
+        return this.input.selectMode = this.constant.all;
       }
     },
     exportCode() {

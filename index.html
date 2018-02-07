@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <title>LED 點矩陣工具</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="//use.fontawesome.com/releases/v5.0.6/js/solid.js"></script>
   <script src="//use.fontawesome.com/releases/v5.0.6/js/fontawesome.js"></script>
@@ -14,11 +14,11 @@
       <div class="col-md-6">
         <p>&nbsp;</p>
         <div class="form-group">
-          <label>Row</label>
+          <label>列數</label>
           <input type="number" class="form-control" v-model="input.row" v-on:change="createLeds" autofocus>
         </div>
         <div class="form-group">
-          <label>Column</label>
+          <label>欄數</label>
           <input type="number" class="form-control" v-model="input.column" v-on:change="createLeds">
         </div>
       </div>
@@ -26,15 +26,15 @@
         <p>&nbsp;</p>
         <div>
           <a href="#" class="color-picker-wrapper" v-on:click="triggerColorPicker">
-            Select Color
+            選擇色彩
             <input type="color" class="color-picker" v-model="input.color" v-on:change="applyColor">
           </a>
         </div>
         <div>
-          <a href="#" v-on:click="input.idMode = !input.idMode">{{ input.idMode ? 'Hide' : 'Show' }} ID</a>
+          <a href="#" v-on:click="input.idMode = !input.idMode">{{ input.idMode ? '隱藏' : '顯示' }} ID</a>
         </div>
         <div>
-          <a href="#" v-on:click="selectMode">Select {{ input.selectMode }}</a>
+          <a href="#" v-on:click="selectMode">{{ input.selectMode }}</a>
         </div>
         <div>
           <div class="alert alert-secondary" role="alert" v-if="this.exportedCode">{{ exportedCode }}</div>
