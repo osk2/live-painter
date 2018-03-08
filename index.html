@@ -27,14 +27,13 @@
         <div>
           <a href="#" class="color-picker-wrapper" v-on:click="triggerColorPicker">
             選擇色彩
-            <input type="color" class="color-picker" v-model="input.color" v-on:change="applyColor">
+            <input type="color" class="color-picker" v-model="input.color">
           </a>
         </div>
         <div>
           <a href="#" v-on:click="input.idMode = !input.idMode">{{ input.idMode ? '隱藏' : '顯示' }} ID</a>
         </div>
         <div>
-          <a href="#" v-on:click="selectMode">{{ input.selectMode }}</a>
         </div>
         <div>
           <div class="alert alert-secondary" role="alert" v-if="this.exportedCode">{{ exportedCode }}</div>
@@ -50,7 +49,7 @@
             v-bind:class="{ active: led.active }"
             v-bind:style="{ 'background-color': led.color }"
             v-bind:id="led.id"
-            v-on:click="toggleLed"
+            v-on:click="applyColor"
             :key="led.id"
           >
             <span class="led-id" v-if="input.idMode">{{ led.id }}</span>

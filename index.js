@@ -6,7 +6,6 @@ const app = new Vue({
       column: 1,
       color: '#ffffff',
       idMode: false,
-      selectMode: '全選'
     },
     leds: [{
       id: 1,
@@ -38,39 +37,14 @@ const app = new Vue({
       e.stopPropagation();
       $('.color-picker').trigger('click');
     },
-    toggleLed(e) {
+    applyColor(e) {
       const id = parseInt($(e.target).attr('id'));
       const index = _.findIndex(this.leds, (led) => {
         return led.id === id;
       });
-      this.leds[index].active = !this.leds[index].active;
-    },
-    applyColor(e) {
-      const color = $(e.target).val();
 
-      this.leds = _.map(this.leds, (led) => {
-        if (led.active) {
-          led.color = color;
-        }
-        return led;
-      });
+      this.leds[index].color = this.input.color;
       this.exportCode();
-    },
-    selectMode() {
-      if (this.input.selectMode === this.constant.all) {
-        this.leds = _.map(this.leds, (led) => {
-          led.active = true;
-          return led;
-        });
-        return this.input.selectMode = this.constant.none;
-      }
-      if (this.input.selectMode === this.constant.none) {
-        this.leds = _.map(this.leds, (led) => {
-          led.active = false;
-          return led;
-        });
-        return this.input.selectMode = this.constant.all;
-      }
     },
     exportCode() {
       const codeArray = _.map(this.leds, (led) => {

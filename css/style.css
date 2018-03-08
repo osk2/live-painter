@@ -41,6 +41,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   transform-origin:50% 50%;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+  cursor: url('/img/dropper.png'), auto;
 }
 
 .color-picker-wrapper {
