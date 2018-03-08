@@ -15,11 +15,27 @@
         <p>&nbsp;</p>
         <div class="form-group">
           <label>列數</label>
-          <input type="number" class="form-control" v-model="input.row" v-on:change="createLeds" autofocus>
+          <input type="number" class="form-control" min="1" v-model.number="input.row" v-on:change="createLeds" autofocus>
         </div>
         <div class="form-group">
           <label>欄數</label>
-          <input type="number" class="form-control" v-model="input.column" v-on:change="createLeds">
+          <input type="number" class="form-control" min="1" v-model.number="input.column" v-on:change="createLeds">
+        </div>
+        <div v-if="input.showBoardSetting">
+          <div class="form-group">
+            <label>開發板 ID</label>
+            <input type="text" class="form-control" v-model="input.deviceID">
+          </div>
+          <div class="form-group">
+            <label>開發板類型</label>
+            <select class="form-control" v-model="input.deviceType">
+              <option value="Smart">Smart</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>PIN 腳位</label>
+            <input type="number" class="form-control" v-model.number="input.pin">
+          </div>
         </div>
       </div>
       <div class="col-md-6 editor">
@@ -31,11 +47,14 @@
           </a>
         </div>
         <div>
-          <a href="#" v-on:click="input.idMode = !input.idMode">{{ input.idMode ? '隱藏' : '顯示' }} ID</a>
+          <a href="#" v-on:click="input.showId = !input.showId">{{ input.showId ? '隱藏' : '顯示' }} ID</a>
         </div>
         <div>
+          <a href="#" v-on:click="input.showBoardSetting = !input.showBoardSetting">{{ input.showBoardSetting ? '結束' : '開始' }}開發板控制</a>
         </div>
+        <p>&nbsp;</p> 
         <div>
+          <span v-if="this.exportedCode">複製代碼：</span>
           <div class="alert alert-secondary" role="alert" v-if="this.exportedCode">{{ exportedCode }}</div>
         </div>
       </div>
@@ -52,17 +71,17 @@
             v-on:click="applyColor"
             :key="led.id"
           >
-            <span class="led-id" v-if="input.idMode">{{ led.id }}</span>
+            <span class="led-id" v-if="input.showId">{{ led.id }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="//cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.slim.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
-  <script src="//blocklypro.webduino.io/webduino-all.min.js"></script>
-  <script src="//blocklypro.webduino.io/webduino-blockly.js"></script>
+  <script src="//blocklypro.webduino.io/dist/lib/webduino-all-0.4.19.min.js"></script>
+  <script src="//blocklypro.webduino.io/dist/webduino-blockly.min.js"></script>
   <script src="//blocklypro.webduino.io/components/webduino-module-ws2812/WS2812.js"></script>
   <script src="//blocklypro.webduino.io/components/webduino-module-ws2812/WS2812-blockly.js"></script>
   <script src="index.js"></script>
