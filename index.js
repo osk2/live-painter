@@ -13,7 +13,7 @@ const app = new Vue({
       pin: 15
     },
     leds: [{
-      id: 1,
+      id: 0,
       color: '#ffffff'
     }],
     exportedCode: '',
@@ -34,7 +34,7 @@ const app = new Vue({
       const ledCount = this.input.row * this.input.column;
 
       this.leds = [];
-      for (let i = 1; i <= ledCount; i++) {
+      for (let i = 0; i < ledCount; i++) {
         this.leds.push({
           id: i,
           color: '#ffffff'
