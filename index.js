@@ -68,13 +68,20 @@ const app = new Vue({
       this.exportCode();
     },
     exportCode() {
-      const codeArray = _.map(this.leds, (led) => {
-        let id = led.id.toString();
-
-        if (id.length < 2) {
-          id = '0' + id;
+      let leds = '';
+      const toHex = function (num) {
+        let str = num.toString(16);
+        if (parseInt(num) < 16) {
+          str = '0' + str;
         }
-        return id + led.color.replace('#', '');
+        return str;
+      };
+      const getLedString = function (id, color) {
+        return (toHex(id) + color.substring(1)).toLowerCase();
+      };
+
+      const codeArray = _.map(this.leds, (led) => {
+        return getLedString(led.id, led.color);
       });
 
       this.exportedCode = codeArray.join('');
